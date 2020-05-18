@@ -1,9 +1,8 @@
 package com.example.feedback.model;
 
-import com.sun.istack.internal.NotNull;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "fb_User")
