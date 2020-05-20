@@ -19,6 +19,16 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    @RequestMapping(value = "/commentsByClass/{id}", method = RequestMethod.GET)
+    public ResponseEntity<List<Comment>> listAllCommentsByClass(@PathVariable("id") int id) {
+        List<Comment> accounts = commentService.findAllByUetClassId(id);
+        if (accounts.isEmpty()) {
+            return new ResponseEntity<List<Comment>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
+        }
+        return new ResponseEntity<List<Comment>>(accounts, HttpStatus.OK);
+    }
+
+
     //API trả về List Comment.
     @RequestMapping(value = "/comments", method = RequestMethod.GET)
     public ResponseEntity<List<Comment>> listAllComments() {

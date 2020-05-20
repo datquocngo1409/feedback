@@ -27,4 +27,8 @@ public class CommentService {
     public void delete(int id) {
         commentRepository.deleteById(id);
     }
+
+    public List<Comment> findAllByUetClassId(int id) {
+        return commentRepository.findAllByUetClassId(id);
+    }
 }
