@@ -9,6 +9,15 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    public Comment() {
+    }
+
+    public Comment(int uetClassId, String content, String username) {
+        this.uetClassId = uetClassId;
+        this.content = content;
+        this.username = username;
+    }
+
     private int uetClassId;
 
     private String content;

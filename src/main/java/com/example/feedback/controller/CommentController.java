@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin(value = "*", maxAge = 3600)
@@ -53,7 +54,11 @@ public class CommentController {
 
     //API tạo một Admin mới.
     @RequestMapping(value = "/comments", method = RequestMethod.POST)
-    public ResponseEntity<Void> createComment(@RequestBody Comment comment, UriComponentsBuilder ucBuilder) {
+    public ResponseEntity<Void> createComment(@RequestBody Map<String, String> map, UriComponentsBuilder ucBuilder) {
+        int uetClassId = Integer.parseInt(map.get("uetClassId"));
+        String content = map.get("content");
+        String username = map.get("username");
+        Comment comment = new Comment(uetClassId, content, username);
         System.out.println("Creating Comment " + comment.getId());
         commentService.save(comment);
         HttpHeaders headers = new HttpHeaders();
