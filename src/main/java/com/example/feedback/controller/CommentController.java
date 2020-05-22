@@ -58,7 +58,8 @@ public class CommentController {
         int uetClassId = Integer.parseInt(map.get("uetClassId"));
         String content = map.get("content");
         String username = map.get("username");
-        Comment comment = new Comment(uetClassId, content, username);
+        int ratingValue = Integer.parseInt(map.get("ratingValue"));
+        Comment comment = new Comment(uetClassId, content, username, ratingValue);
         System.out.println("Creating Comment " + comment.getId());
         commentService.save(comment);
         HttpHeaders headers = new HttpHeaders();

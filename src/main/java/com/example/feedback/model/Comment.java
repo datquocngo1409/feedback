@@ -12,10 +12,11 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(int uetClassId, String content, String username) {
+    public Comment(int uetClassId, String content, String username, int ratingValue) {
         this.uetClassId = uetClassId;
         this.content = content;
         this.username = username;
+        this.ratingValue = ratingValue;
     }
 
     private int uetClassId;
@@ -23,6 +24,8 @@ public class Comment {
     private String content;
 
     private String username;
+
+    int ratingValue;
 
     public int getId() {
         return id;
@@ -54,5 +57,13 @@ public class Comment {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public int getRatingValue() {
+        return ratingValue;
+    }
+
+    public void setRatingValue(int ratingValue) {
+        this.ratingValue = ratingValue;
     }
 }
