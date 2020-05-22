@@ -1,7 +1,9 @@
 package com.example.feedback.controller;
 
 import com.example.feedback.model.Comment;
+import com.example.feedback.model.UetClass;
 import com.example.feedback.service.CommentService;
+import com.example.feedback.service.UetClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,9 @@ public class CommentController {
 
     @Autowired
     private CommentService commentService;
+
+    @Autowired
+    public UetClassService uetClassService;
 
     @RequestMapping(value = "/commentsByClass/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<Comment>> listAllCommentsByClass(@PathVariable("id") int id) {
@@ -59,8 +64,25 @@ public class CommentController {
         String content = map.get("content");
         String username = map.get("username");
         int ratingValue = Integer.parseInt(map.get("ratingValue"));
-        Comment comment = new Comment(uetClassId, content, username, ratingValue);
-        System.out.println("Creating Comment " + comment.getId());
+        Comment comment = commentService.findByUsernameAndClass(username, uetClassId);
+        if (comment == null) {
+            comment = new Comment(uetClassId, content, username, ratingValue);
+            UetClass uetClass = uetClassService.findById(uetClassId);
+            double rateAverage = (uetClass.getRateAverage() * uetClass.getCountRate() + ratingValue) / (uetClass.getCountRate() + 1);
+            uetClass.setCountRate(uetClass.getCountRate() + 1);
+            uetClass.setRateAverage(rateAverage);
+            uetClassService.save(uetClass);
+            System.out.println("Creating Comment " + comment.getId());
+        } else {
+            int lastRatingValue = comment.getRatingValue();
+            comment.setRatingValue(ratingValue);
+            comment.setContent(content);
+            UetClass uetClass = uetClassService.findById(uetClassId);
+            double rateAverage = (uetClass.getRateAverage() * uetClass.getCountRate() + ratingValue - lastRatingValue) / uetClass.getCountRate();
+            uetClass.setRateAverage(rateAverage);
+            uetClassService.save(uetClass);
+            System.out.println("Updating Comment " + comment.getId());
+        }
         commentService.save(comment);
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(ucBuilder.path("/comments/{id}").buildAndExpand(comment.getId()).toUri());

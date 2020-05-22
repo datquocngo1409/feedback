@@ -31,4 +31,8 @@ public class CommentService {
     public List<Comment> findAllByUetClassId(int id) {
         return commentRepository.findAllByUetClassId(id);
     }
+
+    public Comment findByUsernameAndClass(String username, int id) {
+        return commentRepository.findByUsernameAndUetClassId(username, id);
+    }
 }
