@@ -13,6 +13,8 @@ public class Comment {
 
     private String content;
 
+    private String username;
+
     public int getId() {
         return id;
     }
@@ -35,5 +37,13 @@ public class Comment {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }
