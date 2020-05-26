@@ -1,6 +1,7 @@
 package com.example.feedback.model;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "fb_Comment")
@@ -26,6 +27,8 @@ public class Comment {
     private String username;
 
     int ratingValue;
+
+    Date lastUpdateTime;
 
     public int getId() {
         return id;
@@ -65,5 +68,13 @@ public class Comment {
 
     public void setRatingValue(int ratingValue) {
         this.ratingValue = ratingValue;
+    }
+
+    public Date getLastUpdateTime() {
+        return lastUpdateTime;
+    }
+
+    public void setLastUpdateTime(Date lastUpdateTime) {
+        this.lastUpdateTime = lastUpdateTime;
     }
 }

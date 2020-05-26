@@ -24,6 +24,8 @@ public class User {
     @Email
     private String email;
 
+    private String avatarUrl;
+
     public int getId() {
         return id;
     }
@@ -62,5 +64,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }

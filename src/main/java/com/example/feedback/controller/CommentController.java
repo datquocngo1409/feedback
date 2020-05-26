@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -67,6 +68,7 @@ public class CommentController {
         Comment comment = commentService.findByUsernameAndClass(username, uetClassId);
         if (comment == null) {
             comment = new Comment(uetClassId, content, username, ratingValue);
+            comment.setLastUpdateTime(new Date());
             UetClass uetClass = uetClassService.findById(uetClassId);
             double rateAverage = (uetClass.getRateAverage() * uetClass.getCountRate() + ratingValue) / (uetClass.getCountRate() + 1);
             uetClass.setCountRate(uetClass.getCountRate() + 1);
@@ -74,6 +76,7 @@ public class CommentController {
             uetClassService.save(uetClass);
             System.out.println("Creating Comment " + comment.getId());
         } else {
+            comment.setLastUpdateTime(new Date());
             int lastRatingValue = comment.getRatingValue();
             comment.setRatingValue(ratingValue);
             comment.setContent(content);
