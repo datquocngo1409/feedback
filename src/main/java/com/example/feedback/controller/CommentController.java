@@ -64,11 +64,12 @@ public class CommentController {
         int uetClassId = Integer.parseInt(map.get("uetClassId"));
         String content = map.get("content");
         String username = map.get("username");
+        String name = map.get("name");
+        String avatarUrl = map.get("avatarUrl");
         int ratingValue = Integer.parseInt(map.get("ratingValue"));
         Comment comment = commentService.findByUsernameAndClass(username, uetClassId);
         if (comment == null) {
-            comment = new Comment(uetClassId, content, username, ratingValue);
-            comment.setLastUpdateTime(new Date());
+            comment = new Comment(uetClassId, content, username, name, avatarUrl, ratingValue, new Date());
             UetClass uetClass = uetClassService.findById(uetClassId);
             double rateAverage = (uetClass.getRateAverage() * uetClass.getCountRate() + ratingValue) / (uetClass.getCountRate() + 1);
             uetClass.setCountRate(uetClass.getCountRate() + 1);

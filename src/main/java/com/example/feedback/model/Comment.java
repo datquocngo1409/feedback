@@ -13,11 +13,14 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(int uetClassId, String content, String username, int ratingValue) {
+    public Comment(int uetClassId, String content, String username, String name, String avatarUrl, int ratingValue, Date lastUpdateTime) {
         this.uetClassId = uetClassId;
         this.content = content;
         this.username = username;
+        this.name = name;
+        this.avatarUrl = avatarUrl;
         this.ratingValue = ratingValue;
+        this.lastUpdateTime = lastUpdateTime;
     }
 
     private int uetClassId;
@@ -25,6 +28,10 @@ public class Comment {
     private String content;
 
     private String username;
+
+    private String name;
+
+    private String avatarUrl;
 
     int ratingValue;
 
@@ -76,5 +83,21 @@ public class Comment {
 
     public void setLastUpdateTime(Date lastUpdateTime) {
         this.lastUpdateTime = lastUpdateTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
     }
 }
