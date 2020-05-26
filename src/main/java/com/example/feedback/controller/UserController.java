@@ -32,6 +32,18 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
+    @RequestMapping(value = "/userByUsername", method = RequestMethod.POST)
+    public ResponseEntity<User> getByUsername(@RequestBody Map<String, String> map) {
+        String username = map.get("username");
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        user.setPassword("invalid");
+        return new ResponseEntity<User>(user, HttpStatus.OK);
+    }
+
+
     //API trả về List User.
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity<List<User>> listAllUsers() {
