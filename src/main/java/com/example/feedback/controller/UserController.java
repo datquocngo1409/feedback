@@ -39,7 +39,6 @@ public class UserController {
         if (user == null) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        user.setPassword("invalid");
         return new ResponseEntity<User>(user, HttpStatus.OK);
     }
 
