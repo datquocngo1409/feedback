@@ -28,7 +28,7 @@ public class TeacherCommentController {
 
     @RequestMapping(value = "/teacherCommentsByTeacher/{id}", method = RequestMethod.GET)
     public ResponseEntity<List<TeacherComment>> listAllCommentsByClass(@PathVariable("id") int id) {
-        List<TeacherComment> accounts = teacherCommentService.findAllByUetTeacherId(id);
+        List<TeacherComment> accounts = teacherCommentService.findAllByTeacherId(id);
         if (accounts.isEmpty()) {
             return new ResponseEntity<List<TeacherComment>>(HttpStatus.NO_CONTENT);//You many decide to return HttpStatus.NOT_FOUND
         }
