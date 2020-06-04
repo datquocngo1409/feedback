@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "fb_TeacherComment")
+@Table(name = "fb_TeacherCommentRep")
 public class TeacherCommentRep {
 
     @Id
