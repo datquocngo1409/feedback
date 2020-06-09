@@ -13,8 +13,6 @@ public class UetClass {
     @NotNull
     private String displayName;
 
-    private int gvId;
-
     @NotNull
     private String giangVien;
 
@@ -60,13 +58,5 @@ public class UetClass {
 
     public void setRateAverage(double rateAverage) {
         this.rateAverage = rateAverage;
-    }
-
-    public int getGvId() {
-        return gvId;
-    }
-
-    public void setGvId(int gvId) {
-        this.gvId = gvId;
     }
 }
